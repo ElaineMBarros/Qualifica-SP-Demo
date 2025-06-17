@@ -50,3 +50,11 @@ fig, ax = plt.subplots()
 df_filtrado['data_inicio'].dt.date.value_counts().sort_index().plot(kind='bar', ax=ax)
 plt.xticks(rotation=45)
 st.pyplot(fig)
+
+# Gráfico de Pizza
+st.subheader("🥧 Distribuição das Turmas por Modalidade")
+modalidade_counts = df_filtrado['modalidade'].value_counts()
+fig2, ax2 = plt.subplots()
+ax2.pie(modalidade_counts, labels=modalidade_counts.index, autopct='%1.1f%%', startangle=90)
+ax2.axis('equal')
+st.pyplot(fig2)
