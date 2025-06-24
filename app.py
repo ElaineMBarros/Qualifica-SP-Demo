@@ -98,8 +98,10 @@ st.subheader("📥 Download dos Dados Filtrados")
 buffer = BytesIO()
 with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
     df_filtrado.to_excel(writer, index=False, sheet_name='CursosFiltrados')
-# <-- NÃO colocar writer.save() aqui!
-st.download_button(label="📄 Baixar Excel com Dados Filtrados",
-                   data=buffer.getvalue(),
-                   file_name="cursos_filtrados.xlsx",
-                   mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+buffer.seek(0)  # <-- ESTA LINHA É NECESSÁRIA!
+st.download_button(
+    label="📄 Baixar Excel com Dados Filtrados",
+    data=buffer.getvalue(),
+    file_name="cursos_filtrados.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
